@@ -1,0 +1,23 @@
+{
+  "name": "2c2p-client-library",
+  "version": "1.0.0",
+  "description": "Modified 2c2p client-side encryption library with improved usability.",
+  "main": "dist/2c2p.production.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coreymcmahon/2c2p-client-library.git"
+  },
+  "keywords": [
+    "2c2p",
+    "payments",
+    "credit",
+    "card"
+  ],
+  "author": "Corey Mcmahon (contact@coreymcmahon.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/coreymcmahon/2c2p-client-library/issues"
+  },
+  "homepage": "https://github.com/coreymcmahon/2c2p-client-library#readme"
+}
