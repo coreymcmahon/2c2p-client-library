@@ -1263,21 +1263,3 @@ My2c2p.submitForm = function (form, success, error, cardObject) {
     }, cardObject);
     !cardObject && My2c2p.callbackForm("");
 };
-
-/**
- * Usage:
- */
-My2c2p.submitForm(false, function (token) {
-
-    console.log('token', token);
-
-}, function (errorCode, errorMessage) {
-
-    // handle error(s)
-
-}, {
-  cardnumber: "4111111111111111",
-  cvv: "000", 
-  month: "1",
-  year: "2020"
-});
