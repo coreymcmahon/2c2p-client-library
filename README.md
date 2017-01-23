@@ -2,6 +2,8 @@
 
 ## Build
 
+Make sure `keys/development.js` and/or `keys/production.js` is available.
+
 ```
 npm install
 gulp
@@ -17,7 +19,7 @@ gulp --production
 ```javascript
 My2c2p.submitForm(false, function (token) {
 
-  console.log('token', token);
+  console.log('Encrypted card token: ', token);
 
 }, function (errorCode, errorMessage) {
 
