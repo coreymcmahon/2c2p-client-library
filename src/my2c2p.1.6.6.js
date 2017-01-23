@@ -70,7 +70,9 @@ function bnpCopyTo(t) {
     t.t = this.t, t.s = this.s
 }
 
-function bnpFromInt(t) { this.t = 1, this.s = 0 > t ? -1 : 0, t > 0 ? this[0] = t : -1 > t ? this[0] = t + this.DV : this.t = 0 }
+function bnpFromInt(t) {
+    this.t = 1, this.s = 0 > t ? -1 : 0, t > 0 ? this[0] = t : -1 > t ? this[0] = t + this.DV : this.t = 0
+}
 
 function nbv(t) {
     var r = nbi();
@@ -251,7 +253,9 @@ function bnMod(t) {
     return this.abs().divRemTo(t, null, r), this.s < 0 && r.compareTo(BigInteger.ZERO) > 0 && t.subTo(r, r), r
 }
 
-function Classic(t) { this.m = t }
+function Classic(t) {
+    this.m = t
+}
 
 function cConvert(t) {
     return t.s < 0 || t.compareTo(this.m) >= 0 ? t.mod(this.m) : t
@@ -261,11 +265,17 @@ function cRevert(t) {
     return t
 }
 
-function cReduce(t) { t.divRemTo(this.m, null, t) }
+function cReduce(t) {
+    t.divRemTo(this.m, null, t)
+}
 
-function cMulTo(t, r, e) { t.multiplyTo(r, e), this.reduce(e) }
+function cMulTo(t, r, e) {
+    t.multiplyTo(r, e), this.reduce(e)
+}
 
-function cSqrTo(t, r) { t.squareTo(r), this.reduce(r) }
+function cSqrTo(t, r) {
+    t.squareTo(r), this.reduce(r)
+}
 
 function bnpInvDigit() {
     if (this.t < 1) return 0;
@@ -275,7 +285,9 @@ function bnpInvDigit() {
     return r = r * (2 - (15 & t) * r) & 15, r = r * (2 - (255 & t) * r) & 255, r = r * (2 - ((65535 & t) * r & 65535)) & 65535, r = r * (2 - t * r % this.DV) % this.DV, r > 0 ? this.DV - r : -r
 }
 
-function Montgomery(t) { this.m = t, this.mp = t.invDigit(), this.mpl = 32767 & this.mp, this.mph = this.mp >> 15, this.um = (1 << t.DB - 15) - 1, this.mt2 = 2 * t.t }
+function Montgomery(t) {
+    this.m = t, this.mp = t.invDigit(), this.mpl = 32767 & this.mp, this.mph = this.mp >> 15, this.um = (1 << t.DB - 15) - 1, this.mt2 = 2 * t.t
+}
 
 function montConvert(t) {
     var r = nbi();
@@ -297,9 +309,13 @@ function montReduce(t) {
     t.clamp(), t.drShiftTo(this.m.t, t), t.compareTo(this.m) >= 0 && t.subTo(this.m, t)
 }
 
-function montSqrTo(t, r) { t.squareTo(r), this.reduce(r) }
+function montSqrTo(t, r) {
+    t.squareTo(r), this.reduce(r)
+}
 
-function montMulTo(t, r, e) { t.multiplyTo(r, e), this.reduce(e) }
+function montMulTo(t, r, e) {
+    t.multiplyTo(r, e), this.reduce(e)
+}
 
 function bnpIsEven() {
     return 0 == (this.t > 0 ? 1 & this[0] : this.s)
@@ -325,7 +341,9 @@ function bnModPowInt(t, r) {
     return e = 256 > t || r.isEven() ? new Classic(r) : new Montgomery(r), this.exp(t, e)
 }
 
-function Arcfour() { this.i = 0, this.j = 0, this.S = new Array }
+function Arcfour() {
+    this.i = 0, this.j = 0, this.S = new Array
+}
 
 function ARC4init(t) {
     var r, e, n;
@@ -343,9 +361,13 @@ function prng_newstate() {
     return new Arcfour
 }
 
-function rng_seed_int(t) { rng_pool[rng_pptr++] ^= 255 & t, rng_pool[rng_pptr++] ^= t >> 8 & 255, rng_pool[rng_pptr++] ^= t >> 16 & 255, rng_pool[rng_pptr++] ^= t >> 24 & 255, rng_pptr >= rng_psize && (rng_pptr -= rng_psize) }
+function rng_seed_int(t) {
+    rng_pool[rng_pptr++] ^= 255 & t, rng_pool[rng_pptr++] ^= t >> 8 & 255, rng_pool[rng_pptr++] ^= t >> 16 & 255, rng_pool[rng_pptr++] ^= t >> 24 & 255, rng_pptr >= rng_psize && (rng_pptr -= rng_psize)
+}
 
-function rng_seed_time() { rng_seed_int((new Date).getTime()) }
+function rng_seed_time() {
+    rng_seed_int((new Date).getTime())
+}
 
 function rng_get_byte() {
     if (null == rng_state) {
@@ -389,9 +411,13 @@ function pkcs1pad2(t, r) {
     return e[--r] = 2, e[--r] = 0, new BigInteger(e)
 }
 
-function RSAKey() { this.n = null, this.e = 0, this.d = null, this.p = null, this.q = null, this.dmp1 = null, this.dmq1 = null, this.coeff = null }
+function RSAKey() {
+    this.n = null, this.e = 0, this.d = null, this.p = null, this.q = null, this.dmp1 = null, this.dmq1 = null, this.coeff = null
+}
 
-function RSASetPublic(t, r) { null != t && null != r && t.length > 0 && r.length > 0 ? (this.n = parseBigInt(t, 16), this.e = parseInt(r, 16)) : alert("Invalid RSA public key") }
+function RSASetPublic(t, r) {
+    null != t && null != r && t.length > 0 && r.length > 0 ? (this.n = parseBigInt(t, 16), this.e = parseInt(r, 16)) : alert("Invalid RSA public key")
+}
 
 function RSADoPublic(t) {
     return t.modPowInt(this.e, this.n)
@@ -458,14 +484,16 @@ if (null == rng_pool) {
 SecureRandom.prototype.nextBytes = rng_get_bytes, RSAKey.prototype.doPublic = RSADoPublic, RSAKey.prototype.setPublic = RSASetPublic, RSAKey.prototype.encrypt = RSAEncrypt;
 var b64map = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
     b64padchar = "=";
-! function(t) {
+! function (t) {
     "use strict";
 
     function r(t, r) {
         return t.length > r && (t = t.substring(0, r) + o), t
     }
 
-    function e(t, r) { t instanceof e ? (this.enc = t.enc, this.pos = t.pos) : (this.enc = t, this.pos = r) }
+    function e(t, r) {
+        t instanceof e ? (this.enc = t.enc, this.pos = t.pos) : (this.enc = t, this.pos = r)
+    }
 
     function n(t, r, e, n, o) {
         if (!(n instanceof i)) throw "Invalid tag value.";
@@ -485,12 +513,12 @@ var b64map = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
     }
     var o = "â€¦",
         s = /^((?:1[89]|2\d)?\d\d)(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])([01]\d|2[0-3])(?:([0-5]\d)(?:([0-5]\d)(?:[.,](\d{1,3}))?)?)?(Z|[-+](?:[0]\d|1[0-2])([0-5]\d)?)?$/;
-    e.prototype.get = function(r) {
+    e.prototype.get = function (r) {
         if (r === t && (r = this.pos++), r >= this.enc.length) throw "Requesting byte offset " + r + " on a stream of length " + this.enc.length;
         return this.enc[r]
-    }, e.prototype.hexDigits = "0123456789ABCDEF", e.prototype.hexByte = function(t) {
+    }, e.prototype.hexDigits = "0123456789ABCDEF", e.prototype.hexByte = function (t) {
         return this.hexDigits.charAt(t >> 4 & 15) + this.hexDigits.charAt(15 & t)
-    }, e.prototype.hexDump = function(t, r, e) {
+    }, e.prototype.hexDump = function (t, r, e) {
         for (var n = "", i = t; r > i; ++i)
             if (n += this.hexByte(this.get(i)), e !== !0) switch (15 & i) {
                 case 7:
@@ -502,30 +530,30 @@ var b64map = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
                 default:
                     n += " "
             }
-        return n
-    }, e.prototype.isASCII = function(t, r) {
+            return n
+    }, e.prototype.isASCII = function (t, r) {
         for (var e = t; r > e; ++e) {
             var n = this.get(e);
             if (32 > n || n > 176) return !1
         }
         return !0
-    }, e.prototype.parseStringISO = function(t, r) {
+    }, e.prototype.parseStringISO = function (t, r) {
         for (var e = "", n = t; r > n; ++n) e += String.fromCharCode(this.get(n));
         return e
-    }, e.prototype.parseStringUTF = function(t, r) {
+    }, e.prototype.parseStringUTF = function (t, r) {
         for (var e = "", n = t; r > n;) {
             var i = this.get(n++);
             e += String.fromCharCode(128 > i ? i : i > 191 && 224 > i ? (31 & i) << 6 | 63 & this.get(n++) : (15 & i) << 12 | (63 & this.get(n++)) << 6 | 63 & this.get(n++))
         }
         return e
-    }, e.prototype.parseStringBMP = function(t, r) {
+    }, e.prototype.parseStringBMP = function (t, r) {
         for (var e, n, i = "", o = t; r > o;) e = this.get(o++), n = this.get(o++), i += String.fromCharCode(e << 8 | n);
         return i
-    }, e.prototype.parseTime = function(t, r, e) {
+    }, e.prototype.parseTime = function (t, r, e) {
         var n = this.parseStringISO(t, r),
             i = s.exec(n);
         return i ? (e && (i[1] = +i[1], i[1] += i[1] < 70 ? 2e3 : 1900), n = i[1] + "-" + i[2] + "-" + i[3] + " " + i[4], i[5] && (n += ":" + i[5], i[6] && (n += ":" + i[6], i[7] && (n += "." + i[7]))), i[8] && (n += " UTC", "Z" != i[8] && (n += i[8], i[9] && (n += ":" + i[9]))), n) : "Unrecognized time: " + n
-    }, e.prototype.parseInteger = function(t, r) {
+    }, e.prototype.parseInteger = function (t, r) {
         var e = r - t;
         if (e > 6) {
             e <<= 3;
@@ -537,20 +565,20 @@ var b64map = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
         }
         for (var i = 0, o = t; r > o; ++o) i = 256 * i + this.get(o);
         return i
-    }, e.prototype.parseBitString = function(t, e, n) {
+    }, e.prototype.parseBitString = function (t, e, n) {
         for (var i = this.get(t), o = (e - t - 1 << 3) - i, s = "(" + o + " bit)\n", a = "", h = i, u = e - 1; u > t; --u) {
             for (var c = this.get(u), f = h; 8 > f; ++f) a += c >> f & 1 ? "1" : "0";
             if (h = 0, a.length > n) return s + r(a, n)
         }
         return s + a
-    }, e.prototype.parseOctetString = function(t, e, n) {
+    }, e.prototype.parseOctetString = function (t, e, n) {
         if (this.isASCII(t, e)) return r(this.parseStringISO(t, e), n);
         var i = e - t,
             s = "(" + i + " byte)\n";
         n /= 2, i > n && (e = t + n);
         for (var a = t; e > a; ++a) s += this.hexByte(this.get(a));
         return i > n && (s += o), s
-    }, e.prototype.parseOID = function(t, e, n) {
+    }, e.prototype.parseOID = function (t, e, n) {
         for (var i = "", o = 0, s = 0, a = t; e > a; ++a) {
             var h = this.get(a);
             if (o = 128 * o + (127 & h), s += 7, !(128 & h)) {
@@ -562,7 +590,7 @@ var b64map = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
             }
         }
         return s > 0 && (i += ".incomplete"), i
-    }, n.prototype.typeName = function() {
+    }, n.prototype.typeName = function () {
         switch (this.tag.tagClass) {
             case 0:
                 switch (this.tag.tagNumber) {
@@ -630,7 +658,7 @@ var b64map = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
             case 3:
                 return "Private_" + this.tag.tagNumber.toString(16)
         }
-    }, n.prototype.content = function(e) {
+    }, n.prototype.content = function (e) {
         if (this.tag === t) return null;
         e === t && (e = 1 / 0);
         var n = this.posContent(),
@@ -666,9 +694,9 @@ var b64map = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
                 return this.stream.parseTime(n, n + i, 23 == this.tag.tagNumber)
         }
         return null
-    }, n.prototype.toString = function() {
+    }, n.prototype.toString = function () {
         return this.typeName() + "@" + this.stream.pos + "[header:" + this.header + ",length:" + this.length + ",sub:" + (null === this.sub ? "null" : this.sub.length) + "]"
-    }, n.prototype.toPrettyString = function(r) {
+    }, n.prototype.toPrettyString = function (r) {
         r === t && (r = "");
         var e = r + this.typeName() + " @" + this.stream.pos;
         if (this.length >= 0 && (e += "+"), e += this.length, this.tag.tagConstructed ? e += " (constructed)" : !this.tag.isUniversal() || 3 != this.tag.tagNumber && 4 != this.tag.tagNumber || null === this.sub || (e += " (encapsulates)"), e += "\n", null !== this.sub) {
@@ -676,15 +704,15 @@ var b64map = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
             for (var n = 0, i = this.sub.length; i > n; ++n) e += this.sub[n].toPrettyString(r)
         }
         return e
-    }, n.prototype.posStart = function() {
+    }, n.prototype.posStart = function () {
         return this.stream.pos
-    }, n.prototype.posContent = function() {
+    }, n.prototype.posContent = function () {
         return this.stream.pos + this.header
-    }, n.prototype.posEnd = function() {
+    }, n.prototype.posEnd = function () {
         return this.stream.pos + this.header + Math.abs(this.length)
-    }, n.prototype.toHexString = function() {
+    }, n.prototype.toHexString = function () {
         return this.stream.hexDump(this.posStart(), this.posEnd(), !0)
-    }, n.decodeLength = function(t) {
+    }, n.decodeLength = function (t) {
         var r = t.get(),
             e = 127 & r;
         if (e == r) return e;
@@ -693,11 +721,11 @@ var b64map = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
         r = 0;
         for (var n = 0; e > n; ++n) r = 256 * r + t.get();
         return r
-    }, i.prototype.isUniversal = function() {
+    }, i.prototype.isUniversal = function () {
         return 0 === this.tagClass
-    }, i.prototype.isEOC = function() {
+    }, i.prototype.isEOC = function () {
         return 0 === this.tagClass && 0 === this.tagNumber
-    }, n.decode = function(t) {
+    }, n.decode = function (t) {
         t instanceof e || (t = new e(t, 0));
         var r = new e(t),
             o = new i(t),
@@ -705,7 +733,7 @@ var b64map = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
             a = t.pos,
             h = a - r.pos,
             u = null,
-            c = function() {
+            c = function () {
                 if (u = [], null !== s) {
                     for (var r = a + s; t.pos < r;) u[u.length] = n.decode(t);
                     if (t.pos != r) throw "Content size is not correct for container starting at offset " + a
@@ -727,7 +755,9 @@ var b64map = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
                 c();
                 for (var f = 0; f < u.length; ++f)
                     if (u[f].tag.isEOC()) throw "EOC is not supposed to be actual content."
-            } catch (p) { u = null }
+            } catch (p) {
+                u = null
+            }
         }
         if (null === u) {
             if (null === s) throw "We can't skip over an invalid tag with undefined length at offset " + a;
@@ -736,31 +766,33 @@ var b64map = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
         return new n(r, h, s, o, u)
     }, "undefined" != typeof module ? module.exports = n : window.ASN1 = n
 }(),
-function(t, r) { "object" == typeof exports ? module.exports = r() : "function" == typeof define && define.amd ? define(r) : t.GibberishAES = r() }(this, function() {
+function (t, r) {
+    "object" == typeof exports ? module.exports = r() : "function" == typeof define && define.amd ? define(r) : t.GibberishAES = r()
+}(this, function () {
     "use strict";
     var t = 14,
         r = 8,
         e = !1,
-        n = function(t) {
+        n = function (t) {
             try {
                 return unescape(encodeURIComponent(t))
             } catch (r) {
                 throw "Error on UTF-8 encode"
             }
         },
-        i = function(t) {
+        i = function (t) {
             try {
                 return decodeURIComponent(escape(t))
             } catch (r) {
                 throw "Bad Key"
             }
         },
-        o = function(t) {
+        o = function (t) {
             var r, e, n = [];
             for (t.length < 16 && (r = 16 - t.length, n = [r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r]), e = 0; e < t.length; e++) n[e] = t[e];
             return n
         },
-        s = function(t, r) {
+        s = function (t, r) {
             var e, n, i = "";
             if (r) {
                 if (e = t[15], e > 16) throw "Decryption error: Maybe bad key";
@@ -770,21 +802,23 @@ function(t, r) { "object" == typeof exports ? module.exports = r() : "function" 
                 for (n = 0; 16 > n; n++) i += String.fromCharCode(t[n]);
             return i
         },
-        a = function(t) {
+        a = function (t) {
             var r, e = "";
             for (r = 0; r < t.length; r++) e += (t[r] < 16 ? "0" : "") + t[r].toString(16);
             return e
         },
-        h = function(t) {
+        h = function (t) {
             var r = [];
-            return t.replace(/(..)/g, function(t) { r.push(parseInt(t, 16)) }), r
+            return t.replace(/(..)/g, function (t) {
+                r.push(parseInt(t, 16))
+            }), r
         },
-        u = function(t, r) {
+        u = function (t, r) {
             var e, i = [];
             for (r || (t = n(t)), e = 0; e < t.length; e++) i[e] = t.charCodeAt(e);
             return i
         },
-        c = function(e) {
+        c = function (e) {
             switch (e) {
                 case 128:
                     t = 10, r = 4;
@@ -799,12 +833,12 @@ function(t, r) { "object" == typeof exports ? module.exports = r() : "function" 
                     throw "Invalid Key Size Specified:" + e
             }
         },
-        f = function(t) {
+        f = function (t) {
             var r, e = [];
             for (r = 0; t > r; r++) e = e.concat(Math.floor(256 * Math.random()));
             return e
         },
-        p = function(e, n) {
+        p = function (e, n) {
             var i, o = t >= 12 ? 3 : 2,
                 s = [],
                 a = [],
@@ -812,9 +846,12 @@ function(t, r) { "object" == typeof exports ? module.exports = r() : "function" 
                 u = [],
                 c = e.concat(n);
             for (h[0] = U(c), u = h[0], i = 1; o > i; i++) h[i] = U(h[i - 1].concat(c)), u = u.concat(h[i]);
-            return s = u.slice(0, 4 * r), a = u.slice(4 * r, 4 * r + 16), { key: s, iv: a }
+            return s = u.slice(0, 4 * r), a = u.slice(4 * r, 4 * r + 16), {
+                key: s,
+                iv: a
+            }
         },
-        g = function(t, r, e) {
+        g = function (t, r, e) {
             r = T(r);
             var n, i = Math.ceil(t.length / 16),
                 s = [],
@@ -823,7 +860,7 @@ function(t, r) { "object" == typeof exports ? module.exports = r() : "function" 
             for (t.length % 16 === 0 && (s.push([16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16]), i++), n = 0; n < s.length; n++) s[n] = 0 === n ? I(s[n], e) : I(s[n], a[n - 1]), a[n] = d(s[n], r);
             return a
         },
-        l = function(t, r, e, n) {
+        l = function (t, r, e, n) {
             r = T(r);
             var o, a = t.length / 16,
                 h = [],
@@ -834,31 +871,31 @@ function(t, r) { "object" == typeof exports ? module.exports = r() : "function" 
             for (o = 0; a - 1 > o; o++) c += s(u[o]);
             return c += s(u[o], !0), n ? c : i(c)
         },
-        d = function(r, n) {
+        d = function (r, n) {
             e = !1;
             var i, o = S(r, n, 0);
             for (i = 1; t + 1 > i; i++) o = v(o), o = m(o), t > i && (o = y(o)), o = S(o, n, i);
             return o
         },
-        b = function(r, n) {
+        b = function (r, n) {
             e = !0;
             var i, o = S(r, n, t);
             for (i = t - 1; i > -1; i--) o = m(o), o = v(o), o = S(o, n, i), i > 0 && (o = y(o));
             return o
         },
-        v = function(t) {
+        v = function (t) {
             var r, n = e ? M : E,
                 i = [];
             for (r = 0; 16 > r; r++) i[r] = n[t[r]];
             return i
         },
-        m = function(t) {
+        m = function (t) {
             var r, n = [],
                 i = e ? [0, 13, 10, 7, 4, 1, 14, 11, 8, 5, 2, 15, 12, 9, 6, 3] : [0, 5, 10, 15, 4, 9, 14, 3, 8, 13, 2, 7, 12, 1, 6, 11];
             for (r = 0; 16 > r; r++) n[r] = t[i[r]];
             return n
         },
-        y = function(t) {
+        y = function (t) {
             var r, n = [];
             if (e)
                 for (r = 0; 4 > r; r++) n[4 * r] = P[t[4 * r]] ^ F[t[1 + 4 * r]] ^ k[t[2 + 4 * r]] ^ O[t[3 + 4 * r]], n[1 + 4 * r] = O[t[4 * r]] ^ P[t[1 + 4 * r]] ^ F[t[2 + 4 * r]] ^ k[t[3 + 4 * r]], n[2 + 4 * r] = k[t[4 * r]] ^ O[t[1 + 4 * r]] ^ P[t[2 + 4 * r]] ^ F[t[3 + 4 * r]], n[3 + 4 * r] = F[t[4 * r]] ^ k[t[1 + 4 * r]] ^ O[t[2 + 4 * r]] ^ P[t[3 + 4 * r]];
@@ -866,17 +903,17 @@ function(t, r) { "object" == typeof exports ? module.exports = r() : "function" 
                 for (r = 0; 4 > r; r++) n[4 * r] = x[t[4 * r]] ^ N[t[1 + 4 * r]] ^ t[2 + 4 * r] ^ t[3 + 4 * r], n[1 + 4 * r] = t[4 * r] ^ x[t[1 + 4 * r]] ^ N[t[2 + 4 * r]] ^ t[3 + 4 * r], n[2 + 4 * r] = t[4 * r] ^ t[1 + 4 * r] ^ x[t[2 + 4 * r]] ^ N[t[3 + 4 * r]], n[3 + 4 * r] = N[t[4 * r]] ^ t[1 + 4 * r] ^ t[2 + 4 * r] ^ x[t[3 + 4 * r]];
             return n
         },
-        S = function(t, r, e) {
+        S = function (t, r, e) {
             var n, i = [];
             for (n = 0; 16 > n; n++) i[n] = t[n] ^ r[e][n];
             return i
         },
-        I = function(t, r) {
+        I = function (t, r) {
             var e, n = [];
             for (e = 0; 16 > e; e++) n[e] = t[e] ^ r[e];
             return n
         },
-        T = function(e) {
+        T = function (e) {
             var n, i, o, s, a = [],
                 h = [],
                 u = [];
@@ -889,31 +926,31 @@ function(t, r) { "object" == typeof exports ? module.exports = r() : "function" 
                 for (u[n] = [], s = 0; 4 > s; s++) u[n].push(a[4 * n + s][0], a[4 * n + s][1], a[4 * n + s][2], a[4 * n + s][3]);
             return u
         },
-        B = function(t) {
+        B = function (t) {
             for (var r = 0; 4 > r; r++) t[r] = E[t[r]];
             return t
         },
-        A = function(t) {
+        A = function (t) {
             var r, e = t[0];
             for (r = 0; 4 > r; r++) t[r] = t[r + 1];
             return t[3] = e, t
         },
-        D = function(t, r) {
+        D = function (t, r) {
             var e, n = [];
             for (e = 0; e < t.length; e += r) n[e / r] = parseInt(t.substr(e, r), 16);
             return n
         },
-        _ = function(t) {
+        _ = function (t) {
             var r, e = [];
             for (r = 0; r < t.length; r++) e[t[r]] = r;
             return e
         },
-        C = function(t, r) {
+        C = function (t, r) {
             var e, n;
             for (n = 0, e = 0; 8 > e; e++) n = 1 === (1 & r) ? n ^ t : n, t = t > 127 ? 283 ^ t << 1 : t << 1, r >>>= 1;
             return n
         },
-        w = function(t) {
+        w = function (t) {
             var r, e = [];
             for (r = 0; 256 > r; r++) e[r] = C(t, r);
             return e
@@ -927,7 +964,7 @@ function(t, r) { "object" == typeof exports ? module.exports = r() : "function" 
         F = w(11),
         k = w(13),
         P = w(14),
-        q = function(t, r, e) {
+        q = function (t, r, e) {
             var n, i = f(8),
                 o = p(u(r, e), i),
                 s = o.key,
@@ -937,7 +974,7 @@ function(t, r) { "object" == typeof exports ? module.exports = r() : "function" 
                 ];
             return t = u(t, e), n = g(t, s, a), n = h.concat(n), j.encode(n)
         },
-        L = function(t, r, e) {
+        L = function (t, r, e) {
             var n = j.decode(t),
                 i = n.slice(8, 16),
                 o = p(u(r, e), i),
@@ -945,7 +982,7 @@ function(t, r) { "object" == typeof exports ? module.exports = r() : "function" 
                 a = o.iv;
             return n = n.slice(16, n.length), t = l(n, s, a, e)
         },
-        U = function(t) {
+        U = function (t) {
             function r(t, r) {
                 return t << r | t >>> 32 - r
             }
@@ -1002,10 +1039,10 @@ function(t, r) { "object" == typeof exports ? module.exports = r() : "function" 
             for (T = f(t), m = B[0], y = B[1], S = B[2], I = B[3], g = 0; g < T.length; g += 16) l = m, d = y, b = S, v = I, m = a(m, y, S, I, T[g + 0], 7, B[4]), I = a(I, m, y, S, T[g + 1], 12, B[5]), S = a(S, I, m, y, T[g + 2], 17, B[6]), y = a(y, S, I, m, T[g + 3], 22, B[7]), m = a(m, y, S, I, T[g + 4], 7, B[8]), I = a(I, m, y, S, T[g + 5], 12, B[9]), S = a(S, I, m, y, T[g + 6], 17, B[10]), y = a(y, S, I, m, T[g + 7], 22, B[11]), m = a(m, y, S, I, T[g + 8], 7, B[12]), I = a(I, m, y, S, T[g + 9], 12, B[13]), S = a(S, I, m, y, T[g + 10], 17, B[14]), y = a(y, S, I, m, T[g + 11], 22, B[15]), m = a(m, y, S, I, T[g + 12], 7, B[16]), I = a(I, m, y, S, T[g + 13], 12, B[17]), S = a(S, I, m, y, T[g + 14], 17, B[18]), y = a(y, S, I, m, T[g + 15], 22, B[19]), m = h(m, y, S, I, T[g + 1], 5, B[20]), I = h(I, m, y, S, T[g + 6], 9, B[21]), S = h(S, I, m, y, T[g + 11], 14, B[22]), y = h(y, S, I, m, T[g + 0], 20, B[23]), m = h(m, y, S, I, T[g + 5], 5, B[24]), I = h(I, m, y, S, T[g + 10], 9, B[25]), S = h(S, I, m, y, T[g + 15], 14, B[26]), y = h(y, S, I, m, T[g + 4], 20, B[27]), m = h(m, y, S, I, T[g + 9], 5, B[28]), I = h(I, m, y, S, T[g + 14], 9, B[29]), S = h(S, I, m, y, T[g + 3], 14, B[30]), y = h(y, S, I, m, T[g + 8], 20, B[31]), m = h(m, y, S, I, T[g + 13], 5, B[32]), I = h(I, m, y, S, T[g + 2], 9, B[33]), S = h(S, I, m, y, T[g + 7], 14, B[34]), y = h(y, S, I, m, T[g + 12], 20, B[35]), m = u(m, y, S, I, T[g + 5], 4, B[36]), I = u(I, m, y, S, T[g + 8], 11, B[37]), S = u(S, I, m, y, T[g + 11], 16, B[38]), y = u(y, S, I, m, T[g + 14], 23, B[39]), m = u(m, y, S, I, T[g + 1], 4, B[40]), I = u(I, m, y, S, T[g + 4], 11, B[41]), S = u(S, I, m, y, T[g + 7], 16, B[42]), y = u(y, S, I, m, T[g + 10], 23, B[43]), m = u(m, y, S, I, T[g + 13], 4, B[44]), I = u(I, m, y, S, T[g + 0], 11, B[45]), S = u(S, I, m, y, T[g + 3], 16, B[46]), y = u(y, S, I, m, T[g + 6], 23, B[47]), m = u(m, y, S, I, T[g + 9], 4, B[48]), I = u(I, m, y, S, T[g + 12], 11, B[49]), S = u(S, I, m, y, T[g + 15], 16, B[50]), y = u(y, S, I, m, T[g + 2], 23, B[51]), m = c(m, y, S, I, T[g + 0], 6, B[52]), I = c(I, m, y, S, T[g + 7], 10, B[53]), S = c(S, I, m, y, T[g + 14], 15, B[54]), y = c(y, S, I, m, T[g + 5], 21, B[55]), m = c(m, y, S, I, T[g + 12], 6, B[56]), I = c(I, m, y, S, T[g + 3], 10, B[57]), S = c(S, I, m, y, T[g + 10], 15, B[58]), y = c(y, S, I, m, T[g + 1], 21, B[59]), m = c(m, y, S, I, T[g + 8], 6, B[60]), I = c(I, m, y, S, T[g + 15], 10, B[61]), S = c(S, I, m, y, T[g + 6], 15, B[62]), y = c(y, S, I, m, T[g + 13], 21, B[63]), m = c(m, y, S, I, T[g + 4], 6, B[64]), I = c(I, m, y, S, T[g + 11], 10, B[65]), S = c(S, I, m, y, T[g + 2], 15, B[66]), y = c(y, S, I, m, T[g + 9], 21, B[67]), m = e(m, l), y = e(y, d), S = e(S, b), I = e(I, v);
             return p(m).concat(p(y), p(S), p(I))
         },
-        j = function() {
+        j = function () {
             var t = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
                 r = t.split(""),
-                e = function(t) {
+                e = function (t) {
                     {
                         var e, n, i = [],
                             o = "";
@@ -1016,7 +1053,7 @@ function(t, r) { "object" == typeof exports ? module.exports = r() : "function" 
                     for (n = o.slice(0, 64) + "\n", e = 1; e < Math.ceil(o.length / 64); e++) n += o.slice(64 * e, 64 * e + 64) + (Math.ceil(o.length / 64) === e + 1 ? "" : "\n");
                     return n
                 },
-                n = function(r) {
+                n = function (r) {
                     r = r.replace(/\n/g, "");
                     var e, n = [],
                         i = [],
@@ -1024,29 +1061,58 @@ function(t, r) { "object" == typeof exports ? module.exports = r() : "function" 
                     for (e = 0; e < r.length; e += 4) i[0] = t.indexOf(r.charAt(e)), i[1] = t.indexOf(r.charAt(e + 1)), i[2] = t.indexOf(r.charAt(e + 2)), i[3] = t.indexOf(r.charAt(e + 3)), o[0] = i[0] << 2 | i[1] >> 4, o[1] = (15 & i[1]) << 4 | i[2] >> 2, o[2] = (3 & i[2]) << 6 | i[3], n.push(o[0], o[1], o[2]);
                     return n = n.slice(0, n.length - n.length % 16)
                 };
-            return "function" == typeof Array.indexOf && (t = r), { encode: e, decode: n }
+            return "function" == typeof Array.indexOf && (t = r), {
+                encode: e,
+                decode: n
+            }
         }();
-    return { size: c, h2a: h, expandKey: T, encryptBlock: d, decryptBlock: b, Decrypt: e, s2a: u, rawEncrypt: g, rawDecrypt: l, dec: L, openSSLKey: p, a2h: a, enc: q, Hash: { MD5: U }, Base64: j }
+    return {
+        size: c,
+        h2a: h,
+        expandKey: T,
+        encryptBlock: d,
+        decryptBlock: b,
+        Decrypt: e,
+        s2a: u,
+        rawEncrypt: g,
+        rawDecrypt: l,
+        dec: L,
+        openSSLKey: p,
+        a2h: a,
+        enc: q,
+        Hash: {
+            MD5: U
+        },
+        Base64: j
+    }
 });
-var My2c2p = { version: "1.0" };
-My2c2p.errorDescription = function(t) {
+var My2c2p = {
+    version: "1.0"
+};
+My2c2p.errorDescription = function (t) {
     var r = ["card number is required", "card number is invalid", "expiry month is required", "expiry month must be two characters", "expiry year is required", "expiry year must be four characters", "card already expired(year)", "card already expired(month)", "invalid card expiry month", "invalid cvv", "invalid month", "invalid year"];
     return t - 1 > r.length ? "unknown error" : r[t - 1]
 };
-var extractForm = function(t) {
+var extractForm = function (t) {
     return window.jQuery && t instanceof jQuery ? t[0] : t.nodeType && 1 === t.nodeType ? t : document.getElementById(t)
 };
-My2c2p.onSubmitForm = function(t, r) {
+My2c2p.onSubmitForm = function (t, r, cardObject) {
     var e = this,
-        n = "key",
-        o = function(t) {
+        n = window._2c2pKey,
+        o = function (t) {
             var r = [],
                 e = 0;
             for (e = 0; e < t.children.length; e++) child = t.children[e], 1 === child.nodeType && child.attributes["data-encrypt"] ? r.push(child) : child.children.length > 0 && (r = r.concat(o(child)));
             return r
         },
-        s = function(t) {
-            for (var r = { cardnumber: "", cvv: "", month: "", year: "" }, e = o(t), n = 0; n < e.length; n++) {
+        s = function (t) {
+            if (cardObject) return cardObject;
+            for (var r = {
+                    cardnumber: "",
+                    cvv: "",
+                    month: "",
+                    year: ""
+                }, e = o(t), n = 0; n < e.length; n++) {
                 var i = e[n].value;
                 e[n].removeAttribute("name");
                 var s = e[n].attributes["data-encrypt"].value;
@@ -1054,14 +1120,14 @@ My2c2p.onSubmitForm = function(t, r) {
             }
             return r
         },
-        a = function() {
+        a = function () {
             for (var t = "", r = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-+=_", e = 0; 8 > e; e++) t += r.charAt(Math.floor(Math.random() * r.length));
             return t
         },
-        u = function(t, r) {
+        u = function (t, r) {
             return GibberishAES.enc(t, r)
         },
-        c = function(t) {
+        c = function (t) {
             var r, e, n, i, o = [];
             if ("INTEGER" === t.typeName() && (r = t.posContent(), e = t.posEnd(), n = t.stream.hexDump(r, e), n = n.replace(/[ \n]/g, ""), o.push(n)), null !== t.sub)
                 for (i = 0; i < t.sub.length; i++) {
@@ -1070,9 +1136,11 @@ My2c2p.onSubmitForm = function(t, r) {
                 }
             return o
         },
-        f = function(t) {
+        f = function (t) {
             var r, e, i = n;
-            try { r = b64toBA(i), e = ASN1.decode(r) } catch (o) {
+            try {
+                r = b64toBA(i), e = ASN1.decode(r)
+            } catch (o) {
                 throw "Invalid public key."
             }
             var s = c(e);
@@ -1085,14 +1153,14 @@ My2c2p.onSubmitForm = function(t, r) {
             var f = u.encrypt(t);
             return hex2b64(f)
         },
-        p = function(t, r, e) {
+        p = function (t, r, e) {
             var n = document.createElement("input");
             n.setAttribute("type", "hidden"), n.setAttribute("name", r), n.setAttribute("value", e), t.appendChild(n)
         };
-    e.isEmpty = function(t) {
+    e.isEmpty = function (t) {
         return !t || 0 === t.length
     };
-    var g = function(t) {
+    var g = function (t) {
             var r, e, n, i, o;
             for (i = "", r = 0; r < t.length; r++) n = parseInt(t.charAt(r), 10), n >= 0 && 9 >= n && (i = n + i);
             if (i.length <= 1) return !1;
@@ -1100,7 +1168,7 @@ My2c2p.onSubmitForm = function(t, r) {
             for (e = 0, r = 0; r < o.length; r++) n = parseInt(o.charAt(r), 10), e += n;
             return 0 != e && e % 10 == 0 ? !0 : !1
         },
-        l = function(t) {
+        l = function (t) {
             var r = new Date,
                 n = r.getFullYear(),
                 i = r.getMonth();
@@ -1131,7 +1199,7 @@ My2c2p.onSubmitForm = function(t, r) {
             }
             return 0
         },
-        d = function(t) {
+        d = function (t) {
             var r = t.substring(0, 6),
                 e = t.substring(t.length - 4),
                 n = t.length - 10,
@@ -1142,8 +1210,8 @@ My2c2p.onSubmitForm = function(t, r) {
             }
             return t
         },
-        b = function(t) {
-            var r = s(t),
+        b = function (t, returnToken) {
+            var r = cardObject ? cardObject : s(t),
                 e = a(),
                 n = f(e),
                 i = r.cardnumber,
@@ -1162,18 +1230,54 @@ My2c2p.onSubmitForm = function(t, r) {
                 T = I.toString(16);
             for (h = T.length; 4 > h; h++) T = "0" + T;
             var B = T + n + S;
+            if (returnToken) return B;
             B = B.replace("\n", ""), p(t, "encryptedCardInfo", B), p(t, "maskedCardInfo", o), p(t, "expMonthCardInfo", c), p(t, "expYearCardInfo", g)
-        },
-        t = extractForm(t);
-    e.callbackForm = function(n) {
-        var i = l(t);
-        0 != i ? ("" != n && n.preventDefault(), r ? r(i, e.errorDescription(i)) : alert(e.errorDescription(i))) : (b(t), r && r(0, ""))
-    }, window.jQuery ? window.jQuery(t).submit(e.callbackForm) : t.addEventListener ? t.addEventListener("submit", e.callbackForm, !1) : t.attachEvent && t.attachEvent("onsubmit", e.callbackForm)
+        };
+        if (!cardObject) {
+            t = extractForm(t);
+            e.callbackForm = function (n) {
+                var i = l(t);
+                0 != i ? ("" != n && n.preventDefault(), r ? r(i, e.errorDescription(i)) : alert(e.errorDescription(i))) : (b(t), r && r(0, ""))
+            }, window.jQuery ? window.jQuery(t).submit(e.callbackForm) : t.addEventListener ? t.addEventListener("submit", e.callbackForm, !1) : t.attachEvent && t.attachEvent("onsubmit", e.callbackForm)
+        } else {
+            t = cardObject;
+            var i = l(t);
+            if (i) {
+                alert(i);
+                // "" != n && n.preventDefault();
+                r ? r(i, e.errorDescription(i)) : alert(e.errorDescription(i))
+            } else {
+                window.cardToken = b(t, true);
+                r && r(0, "");
+            }
+        }
 },
-My2c2p.submitForm = function(t,s,r) {
-    My2c2p.onSubmitForm(t, function(e, n) {
-        if (0 == e && "" == n) {
-            s()
-        } else r(e, n)
-    }), My2c2p.callbackForm("")
+
+My2c2p.submitForm = function (form, success, error, cardObject) {
+    My2c2p.onSubmitForm(form, function (errorCode, errorMessage) {
+        if (0 == errorCode && "" == errorMessage) {
+            success(window.cardToken);
+        } else {
+            error(errorCode, errorMessage)
+        }
+    }, cardObject);
+    !cardObject && My2c2p.callbackForm("");
 };
+
+/**
+ * Usage:
+ */
+My2c2p.submitForm(false, function (token) {
+
+    console.log('token', token);
+
+}, function (errorCode, errorMessage) {
+
+    // handle error(s)
+
+}, {
+  cardnumber: "4111111111111111",
+  cvv: "000", 
+  month: "1",
+  year: "2020"
+});
