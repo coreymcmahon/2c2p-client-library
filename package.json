@@ -2,8 +2,10 @@
   "name": "2c2p-client-library",
   "version": "1.0.0",
   "description": "Modified 2c2p client-side encryption library with improved usability.",
-  "main": "dist/2c2p.production.js",
-  "scripts": {},
+  "main": "dist/my2c2p.1.6.6.production.js",
+  "scripts": {
+    "build": "node scripts/build.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/coreymcmahon/2c2p-client-library.git"
@@ -19,5 +21,10 @@
   "bugs": {
     "url": "https://github.com/coreymcmahon/2c2p-client-library/issues"
   },
-  "homepage": "https://github.com/coreymcmahon/2c2p-client-library#readme"
+  "homepage": "https://github.com/coreymcmahon/2c2p-client-library#readme",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-util": "^3.0.8"
+  }
 }

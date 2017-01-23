@@ -1,4 +1,6 @@
 keys
-!keys/.gitkeep
+!keys/example.js
 dist
 !dist/.gitkeep
+npm-debug.log
+node_modules/

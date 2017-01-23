@@ -1,5 +1,17 @@
 # 2C2P Client side encryption library
 
+## Build
+
+```
+npm install
+gulp
+```
+
+```
+npm install
+gulp --production
+```
+
 ## Usage
 
 ```javascript
